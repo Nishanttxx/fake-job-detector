@@ -1,33 +1,66 @@
-import { useAuth } from "@/_core/hooks/useAuth";
+import { useMemo, useState } from "react";
+import { Activity, AlertTriangle, ArrowUpRight, BarChart3, CheckCircle2, ChevronRight, Database, FileText, Gauge, Radar, ShieldCheck, Sparkles, Target, TriangleAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
+import { trpc } from "@/lib/trpc";
 
-/**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Workflow, Frontend Best Practices, Design Guide and Common Pitfalls
- */
-export default function Home() {
-  // The useAuth hook provides authentication state.
-  // To implement login/logout, call logout(), or start login from an event
-  // handler: onClick={() => startLogin()} (imported from "@/const"). Never call
-  // startLogin() during render (no href={startLogin()}) — it mints a one-time
-  // nonce cookie and must run only at the moment of navigation.
-  let { user, loading, error, isAuthenticated, logout } = useAuth();
+const defaultPosting = { job_title: "", location: "", salary_range: "", company_profile: "", job_desc: "", skills_desc: "", employment_type: "" };
 
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
+type Posting = typeof defaultPosting;
 
-  return (
-    <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
-      </main>
-    </div>
-  );
+function formatPct(value: number | undefined) { return `${Math.round((value ?? 0) * 100)}%`; }
+
+function Stat({ label, value, detail, icon: Icon, tone = "ink" }: { label: string; value: string; detail: string; icon: typeof Activity; tone?: string }) {
+  return <Card className="stat-card"><CardContent className="p-5"><div className="flex items-start justify-between"><div><p className="eyebrow">{label}</p><p className="stat-value">{value}</p><p className="stat-detail">{detail}</p></div><div className={`icon-box ${tone}`}><Icon size={18} /></div></div></CardContent></Card>;
 }
+
+export default function Home() {
+  const [active, setActive] = useState("screen");
+  const [posting, setPosting] = useState<Posting>(defaultPosting);
+  const [result, setResult] = useState<ReturnType<typeof trpc.model.predict.useMutation>["data"]>();
+  const overview = trpc.model.overview.useQuery();
+  const predict = trpc.model.predict.useMutation({ onSuccess: setResult });
+  const data = overview.data;
+  const selected = data?.selectedModel as Record<string, any> | undefined;
+  const hasContent = useMemo(() => Object.values(posting).some(Boolean), [posting]);
+  const update = (key: keyof Posting, value: string) => setPosting((current) => ({ ...current, [key]: value }));
+
+  const nav = [
+    { id: "screen", label: "Screen a posting", icon: Radar },
+    { id: "overview", label: "Data overview", icon: Database },
+    { id: "models", label: "Model lab", icon: BarChart3 },
+  ];
+
+  return <div className="app-shell">
+    <aside className="sidebar">
+      <div className="brand"><div className="brand-mark"><ShieldCheck size={19} /></div><div><div className="brand-name">SignalHire</div><div className="brand-sub">Trust intelligence</div></div></div>
+      <div className="sidebar-rule" />
+      <p className="nav-label">Workspace</p>
+      <nav className="nav-stack">{nav.map((item) => <button key={item.id} className={`nav-item ${active === item.id ? "active" : ""}`} onClick={() => setActive(item.id)}><item.icon size={17} /><span>{item.label}</span>{active === item.id && <ChevronRight className="nav-arrow" size={15} />}</button>)}</nav>
+      <div className="sidebar-bottom"><div className="model-status"><div className="status-dot" /><div><p>Model online</p><span>v{data?.version ?? "2026.08.29"}</span></div></div><p className="sidebar-foot">Built on labelled job-posting data.<br />Use signals as decision support, not proof.</p></div>
+    </aside>
+    <main className="main-canvas">
+      <header className="topbar"><div><p className="kicker">FAKE-JOB DETECTION / WORKSPACE</p><h1>{active === "screen" ? "Screen a job posting" : active === "overview" ? "Data overview" : "Model lab"}</h1></div><div className="topbar-actions"><Badge variant="outline" className="live-badge"><span className="status-dot" /> Live model</Badge><Button variant="outline" size="sm" onClick={() => setActive("overview")}><Activity size={15} /> System status</Button></div></header>
+      <div className="content-wrap">
+        {active === "screen" && <>
+          <section className="hero-strip"><div><p className="hero-kicker"><Sparkles size={14} /> Explainable screening</p><h2>Spot the signal<br /><em>before it costs you.</em></h2><p className="hero-copy">Paste a posting and get a calibrated risk estimate, grounded in the patterns learned from your supplied dataset.</p></div><div className="hero-orbit"><div className="orbit-ring ring-one" /><div className="orbit-ring ring-two" /><div className="orbit-core"><ShieldCheck size={26} /><span>SAFE</span></div></div></section>
+          <div className="stats-grid"><Stat label="Labelled records" value={data ? data.training.labelled_rows.toLocaleString() : "—"} detail="5,000 used for training" icon={FileText} tone="blue" /><Stat label="Fake-job prevalence" value={data ? formatPct(data.training.positive_count / data.training.labelled_rows) : "—"} detail="Within supervised sample" icon={TriangleAlert} tone="amber" /><Stat label="Model F1 score" value={formatPct(selected?.f1)} detail="Held-out test set" icon={Target} tone="green" /><Stat label="Unlabelled coverage" value={data ? `${Math.round(data.training.unlabelled_rows / 1000)}k` : "—"} detail="Rows ready for scoring" icon={Database} tone="violet" /></div>
+          <div className="screen-grid"><Card className="screen-card"><CardHeader className="card-head"><div><p className="eyebrow">01 / INPUT</p><CardTitle>Posting details</CardTitle></div><Badge variant="secondary">All fields optional</Badge></CardHeader><CardContent><div className="field-grid"><div className="field"><Label>Job title</Label><Input placeholder="e.g. Customer Success Manager" value={posting.job_title} onChange={(e) => update("job_title", e.target.value)} /></div><div className="field"><Label>Location</Label><Input placeholder="e.g. Austin, TX / Remote" value={posting.location} onChange={(e) => update("location", e.target.value)} /></div><div className="field"><Label>Salary range</Label><Input placeholder="e.g. $60k – $80k" value={posting.salary_range} onChange={(e) => update("salary_range", e.target.value)} /></div><div className="field"><Label>Employment type</Label><Input placeholder="e.g. Full-time" value={posting.employment_type} onChange={(e) => update("employment_type", e.target.value)} /></div></div><div className="field"><Label>Company profile</Label><Textarea className="small-textarea" placeholder="What does the company do?" value={posting.company_profile} onChange={(e) => update("company_profile", e.target.value)} /></div><div className="field"><Label>Job description <span className="required">*</span></Label><Textarea className="large-textarea" placeholder="Paste the full job description here…" value={posting.job_desc} onChange={(e) => update("job_desc", e.target.value)} /></div><div className="field"><Label>Requirements / skills</Label><Textarea className="small-textarea" placeholder="Experience, qualifications, benefits…" value={posting.skills_desc} onChange={(e) => update("skills_desc", e.target.value)} /></div><div className="form-footer"><span className="muted-note"><span className="tiny-dot" /> Text is cleaned and scored locally against the persisted model.</span><Button className="screen-button" disabled={!hasContent || predict.isPending} onClick={() => predict.mutate(posting)}>{predict.isPending ? "Scoring…" : "Run screening"}<ArrowUpRight size={16} /></Button></div></CardContent></Card>
+          <Card className={`result-card ${result ? (result.label === "Fraudulent" ? "risk-high" : "risk-low") : "result-empty"}`}><CardHeader className="card-head"><div><p className="eyebrow">02 / RESULT</p><CardTitle>{result ? "Screening result" : "Awaiting a posting"}</CardTitle></div>{result && <Badge className={result.label === "Fraudulent" ? "danger-badge" : "safe-badge"}>{result.label}</Badge>}</CardHeader><CardContent>{result ? <div className="result-body"><div className="score-ring" style={{"--score": `${result.probability * 100}%`} as React.CSSProperties}><div><strong>{formatPct(result.probability)}</strong><span>fake risk</span></div></div><div className="result-verdict"><h3>{result.label === "Fraudulent" ? "Proceed with caution" : "Low-risk signal"}</h3><p>{result.label === "Fraudulent" ? "This posting matches patterns associated with fraudulent listings in the training data." : "No strong fraud pattern was detected in the submitted content."}</p></div><div className="probability-row"><span>Fraudulent</span><Progress value={result.probability * 100} className="progress-risk" /><strong>{formatPct(result.probability)}</strong></div><div className="probability-row"><span>Legitimate</span><Progress value={result.legitimateProbability * 100} className="progress-safe" /><strong>{formatPct(result.legitimateProbability)}</strong></div><div className="signals"><div className="signals-head"><span>Contributing signals</span><span>{result.signals.length} found</span></div>{result.signals.length ? result.signals.map((signal) => <div className="signal" key={signal.id}><div className="signal-icon"><AlertTriangle size={14} /></div><div><strong>{signal.label}</strong><span>Matched: {signal.matched.join(", ")}</span></div><span className="signal-impact">+{Math.round(signal.impact * 100)}%</span></div>) : <div className="no-signals"><CheckCircle2 size={16} /> No rule-based warning signals matched.</div>}</div><p className="result-disclaimer">Model: {result.model} · v{result.modelVersion} · Risk is a screening aid, not a definitive verdict.</p></div> : <div className="empty-result"><div className="empty-icon"><Gauge size={24} /></div><h3>Your result will appear here</h3><p>Add a job description to see the risk score and the specific signals that influenced it.</p><div className="empty-rule" /><span>Model confidence is calibrated from held-out data</span></div>}</CardContent></Card></div>
+        </>}
+        {active === "overview" && <Overview data={data} onNavigate={() => setActive("models")} />}
+        {active === "models" && <Models data={data} />}
+      </div>
+    </main>
+  </div>;
+}
+
+function Overview({ data, onNavigate }: { data: any; onNavigate: () => void }) { if (!data) return <div className="loading-card">Loading model overview…</div>; const t = data.training; return <div className="workspace-stack"><section className="section-intro"><p className="hero-kicker"><Database size={14} /> Source of truth</p><h2>What the model knows</h2><p>Coverage and preparation decisions from the two supplied Excel workbooks, carried through to the deployed screening surface.</p></section><div className="overview-grid"><Card><CardHeader><CardTitle>Dataset coverage</CardTitle></CardHeader><CardContent><div className="coverage-row"><div><span>Labelled workbook</span><strong>{t.raw_rows.toLocaleString()} raw rows</strong></div><div className="coverage-bar"><span style={{ width: "29%" }} /></div><small>{t.duplicate_rows.toLocaleString()} duplicates removed · {t.positive_count.toLocaleString()} fake labels in training sample</small></div><div className="coverage-row"><div><span>Unlabelled workbook</span><strong>{t.unlabelled_rows.toLocaleString()} rows</strong></div><div className="coverage-bar purple"><span style={{ width: "72%" }} /></div><small>{"Ready for future batch scoring · " + data.version}</small></div></CardContent></Card><Card><CardHeader><CardTitle>Pipeline decisions</CardTitle></CardHeader><CardContent><div className="decision-list"><p><CheckCircle2 size={15} />Exact duplicates removed before splitting.</p><p><CheckCircle2 size={15} />Rows missing the target excluded from supervised learning.</p><p><CheckCircle2 size={15} />TF-IDF fitted on training data only to prevent leakage.</p><p><CheckCircle2 size={15} />Salary, urgency, contact, and payment terms preserved.</p></div></CardContent></Card><Card><CardHeader><CardTitle>Recent sample predictions</CardTitle></CardHeader><CardContent>{data.recentPredictions.length ? <div className="recent-list">{data.recentPredictions.map((item: any) => <div className="recent-item" key={item.id}><div><strong>{item.title}</strong><span>{new Date(item.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span></div><Badge className={item.label === "Fraudulent" ? "danger-badge" : "safe-badge"}>{item.label} · {formatPct(item.probability)}</Badge></div>)}</div> : <p className="muted-note">No screenings yet in this session. Run a posting from the screening workspace to create a sample.</p>}</CardContent></Card></div><Card><CardHeader className="card-head"><div><p className="eyebrow">MODEL STATUS</p><CardTitle>Selected model</CardTitle></div><Button variant="outline" size="sm" onClick={onNavigate}>Open model lab <ArrowUpRight size={14} /></Button></CardHeader><CardContent><div className="model-banner"><div className="model-name"><div className="icon-box green"><ShieldCheck size={19} /></div><div><strong>{data.model.name}</strong><span>TF-IDF text · class-balanced · reproducible bundle</span></div></div><div className="mini-metrics"><div><span>F1</span><strong>{formatPct(data.selectedModel.f1)}</strong></div><div><span>Recall</span><strong>{formatPct(data.selectedModel.recall)}</strong></div><div><span>ROC-AUC</span><strong>{formatPct(data.selectedModel.roc_auc)}</strong></div></div></div></CardContent></Card></div> }
+
+function Models({ data }: { data: any }) { if (!data) return <div className="loading-card">Loading experiment results…</div>; return <div className="workspace-stack"><section className="section-intro"><p className="hero-kicker"><BarChart3 size={14} /> Evaluation lab</p><h2>Compare the candidates</h2><p>Class-aware results from the fixed stratified test split. Recall matters here: false negatives can leave a fraudulent posting looking legitimate.</p></section><div className="model-table-wrap"><table className="model-table"><thead><tr><th>Model / features</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th><th>ROC-AUC</th><th>FN</th></tr></thead><tbody>{data.results.map((row: any, index: number) => <tr key={`${row.model}-${row.features}`} className={index === 0 ? "selected-row" : ""}><td><div className="table-model"><strong>{row.model}</strong><span>{row.features}</span>{index === 0 && <Badge>Selected</Badge>}</div></td><td>{formatPct(row.accuracy)}</td><td>{formatPct(row.precision)}</td><td>{formatPct(row.recall)}</td><td><strong>{formatPct(row.f1)}</strong></td><td>{formatPct(row.roc_auc)}</td><td>{row.false_negatives}</td></tr>)}</tbody></table></div><div className="metric-note"><div className="icon-box amber"><AlertTriangle size={18} /></div><div><strong>Why these metrics?</strong><p>The selected Logistic Regression model exposes probabilities and strong precision for safer review queues. Linear SVM reached higher recall on this split, but does not provide native calibrated probabilities for the user-facing confidence score.</p></div></div><div className="confusion-card"><div><p className="eyebrow">SELECTED MODEL / CONFUSION MATRIX</p><h3>Where the model is right — and where it misses</h3><p>The bottom-left cell is the costliest error: a fraudulent posting classified as legitimate.</p></div><div className="matrix-grid"><div className="matrix-axis y-axis">Actual</div><div className="matrix-cell tn"><span>{data.selectedModel.confusion_matrix[0][0]}</span><small>Legit → legit</small></div><div className="matrix-cell fp"><span>{data.selectedModel.confusion_matrix[0][1]}</span><small>Legit → fraud</small></div><div className="matrix-cell fn"><span>{data.selectedModel.confusion_matrix[1][0]}</span><small>Fraud → legit</small></div><div className="matrix-cell tp"><span>{data.selectedModel.confusion_matrix[1][1]}</span><small>Fraud → fraud</small></div><div className="matrix-axis x-axis">Predicted</div></div></div></div> }

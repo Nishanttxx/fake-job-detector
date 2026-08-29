@@ -1,0 +1,229 @@
+{
+  "preprocessed_unlabelled_data_bert.xlsx": {
+    "file": "preprocessed_unlabelled_data_bert.xlsx",
+    "rows": 126549,
+    "columns": 9,
+    "column_names": [
+      "title",
+      "location",
+      "salary_range",
+      "company_profile",
+      "job_desc",
+      "skills_desc",
+      "employment_type",
+      "No of reviews",
+      "text_input"
+    ],
+    "dtypes": {
+      "title": "str",
+      "location": "str",
+      "salary_range": "str",
+      "company_profile": "str",
+      "job_desc": "str",
+      "skills_desc": "str",
+      "employment_type": "str",
+      "No of reviews": "float64",
+      "text_input": "str"
+    },
+    "missing_values": {
+      "title": 4,
+      "location": 2,
+      "salary_range": 0,
+      "company_profile": 1721,
+      "job_desc": 14,
+      "skills_desc": 121410,
+      "employment_type": 0,
+      "No of reviews": 4389,
+      "text_input": 0
+    },
+    "duplicate_rows": 1354,
+    "nunique": {
+      "title": 73271,
+      "location": 8982,
+      "salary_range": 10814,
+      "company_profile": 25097,
+      "job_desc": 110059,
+      "skills_desc": 4803,
+      "employment_type": 7,
+      "No of reviews": 685,
+      "text_input": 125195
+    },
+    "sample": [
+      {
+        "title": "marketing coordinator",
+        "location": "princeton, nj",
+        "salary_range": "20-17",
+        "company_profile": "corcoran sawyer smith",
+        "job_desc": "job descriptiona leading real estate firm in new jersey is seeking an administrative marketing coordinator with some experience in graphic design. you will be working closely with our fun, kind, ambitious members of the sales team and our dynamic executive team on a daily basis. this is an opportunity to be part of a fast-growing, highly respected real estate brokerage with a reputation for exceptional marketing and extraordinary culture of cooperation and inclusion.who you are:you must be a well-organized, creative, proactive, positive, and most importantly, kind-hearted person. please, be responsible, respectful, and cool-under-pressure. please, be proficient in adobe creative cloud (indesign, illustrator, photoshop) and microsoft office suite. above all, have fantastic taste and be a good-hearted, fun-loving person who loves working with people and is eager to learn.role:our office is a fast-paced environment. youll work directly with a marketing team and communicate daily with other core staff and our large team of agents. this description is a brief overview, but your skills and interests will be considered in what you work on and as the role evolves over time.agent assistance- receive organize marketing requests from agents- track tasks communicate with marketing team agents on status- prepare print materials and signs for open houses- submit orders to printers communicate track deadlinesgraphic design branding- managing brand strategy and messaging through website, social media, videos, online advertising, print placement and events- receive, organize, and prioritize marketing requests from agents- fulfill agent design requests including postcards, signs, email marketing and property brochures using pre-existing templates and creating custom designs- maintain brand assets and generic filesevents community- plan and execute events and promotions- manage contacts vendors for event planning sponsorshipsour company is committed to creating a diverse environment and is proud to be an equal opportunity employer. all qualified applicants will receive consideration for employment without regard to race, color, religion, gender, gender identity or expression, sexual orientation, national origin, genetics, disability, age, or veteran status.job type: full-time pay: 18-20/hour expected hours: 35 45 per week benefits:paid time offschedule:8 hour shiftmonday to fridayexperience:marketing: 1 year (preferred)graphic design: 2 years (preferred)work location: in person",
+        "skills_desc": "requirements: we are seeking a college or graduate student (can also be completed with school) with a focus in planning, architecture, real estate development or management or general business. must be able to work in an extremely fast paced environment and able to multitask and prioritize.",
+        "employment_type": "fulltime",
+        "No of reviews": "20.0",
+        "text_input": "marketing coordinator | princeton, nj | 20-17 | corcoran sawyer smith | job descriptiona leading real estate firm in new jersey is seeking an administrative marketing coordinator with some experience in graphic design. you will be working closely with our fun, kind, ambitious members of the sales team and our dynamic executive team on a daily basis. this is an opportunity to be part of a fast-growing, highly respected real estate brokerage with a reputation for exceptional marketing and extraordinary culture of cooperation and inclusion.who you are:you must be a well-organized, creative, proactive, positive, and most importantly, kind-hearted person. please, be responsible, respectful, and cool-under-pressure. please, be proficient in adobe creative cloud (indesign, illustrator, photoshop) and microsoft office suite. above all, have fantastic taste and be a good-hearted, fun-loving person who loves working with people and is eager to learn.role:our office is a fast-paced environment. youll work directly with a marketing team and communicate daily with other core staff and our large team of agents. this description is a brief overview, but your skills and interests will be considered in what you work on and as the role evolves over time.agent assistance- receive organize marketing requests from agents- track tasks communicate with marketing team agents on status- prepare print materials and signs for open houses- submit orders to printers communicate track deadlinesgraphic design branding- managing brand strategy and messaging through website, social media, videos, online advertising, print placement and events- receive, organize, and prioritize marketing requests from agents- fulfill agent design requests including postcards, signs, email marketing and property brochures using pre-existing templates and creating custom designs- maintain brand assets and generic filesevents community- plan and execute events and promotions- manage contacts vendors for event planning sponsorshipsour company is committed to creating a diverse environment and is proud to be an equal opportunity employer. all qualified applicants will receive consideration for employment without regard to race, color, religion, gender, gender identity or expression, sexual orientation, national origin, genetics, disability, age, or veteran status.job type: full-time pay: 18-20/hour expected hours: 35 45 per week benefits:paid time offschedule:8 hour shiftmonday to fridayexperience:marketing: 1 year (preferred)graphic design: 2 years (preferred)work location: in person | requirements: we are seeking a college or graduate student (can also be completed with school) with a focus in planning, architecture, real estate development or management or general business. must be able to work in an extremely fast paced environment and able to multitask and prioritize. | fulltime | Number of reviews: 20.0"
+      },
+      {
+        "title": "mental health therapist/counselor",
+        "location": "fort collins, co",
+        "salary_range": "50-30",
+        "company_profile": "",
+        "job_desc": "at aspen therapy and wellness , we are committed to serving clients with best practices to help them with change, improvements and better quality of life. we believe in providing a secure, supportive environment to grow as a clinician and learn how to foster longevity in the career which is part of our mission statement. thank you for taking the time to explore a career with us. we are excited to be a new group practice in the community. if you are looking for quality supervision as you work towards licensure and ability to serve populations while accepting a variety of insurance panels, we may be a good fit. our supervisors are trained in emdr and utilize a parts work perspective with a trauma lens. we are actively looking to hire a therapist in the area who is passionate about working with adults and committed to growth and excellence in the field. we are located in old town square, fort collins. we value and are strengthened by diversity and desire a warm and welcoming place for all people. we believe in racial and ethnic equality, gender equity and social inclusion. position requirement possibilities:a graduate level psychological counseling-related degreemasters of social work (msw/lsw)licensed professional counselor candidate (lpcc)clinical social worker (lcsw)professional counselor (lpc)marriage/family therapist (lmft)relating to this?wanting to deliver high quality mental healthcareseeking quality supervision and growth in a healthy environmentwhat we offer:flexible work schedulew2 employment - commission basedbuilding to full time workjump of 5 in commission as well as monthly bonus/stipend once full timeweekly supervision providedpaid weekly team meetings 30/hrtwo paid wellness hours/month 30/hrtelemedicine and in-person flexibilitysupportive work environment with direct access to two supervisorsadministrative supportapproved professional development training providedfully automated ehr and technology supportstrong work/life balancejob duties:conducting intake assessmentsdeveloping and implementing treatment plans for clients based on assessment and coordinating any additional services needed, revising as necessaryconducting individual sessions as appropriate for the treatment plan of the patientapplying psychotherapeutic techniques and interventions in the delivery of services to individuals for the purpose of treating emotional and behavioral disorders that have been diagnosed in assessmentparticipating in team meetings in order to staff new cases. presenting appropriate patient information to the team. recommending effective treatment interventions.building and maintaining an active caseload with assigned clientscompleting timely progress notes and treatment updates in the ehr. maintaining all clinical documentation in accordance with regulatory and accrediting standardsproviding crisis intervention to patients in acute distress and referring as neededperforming case management and discharge planning as neededexcellent communication and interpersonal skillscompassionate and empathetic approach to patient careplease send resume and cover letter to infoaspentherapyandwellness.com about aspen therapy and wellness llcaspen therapy and wellness is a mental health services provider focusing on work with adults in an outpatient setting, working with a variety of mental health issues both in-person in old town fort collins and throughout the state of colorado via telehealth services. please note that this job description is not exhaustive and additional duties may be assigned as needed.",
+        "skills_desc": "",
+        "employment_type": "fulltime",
+        "No of reviews": "1.0",
+        "text_input": "mental health therapist/counselor | fort collins, co | 50-30 |  | at aspen therapy and wellness , we are committed to serving clients with best practices to help them with change, improvements and better quality of life. we believe in providing a secure, supportive environment to grow as a clinician and learn how to foster longevity in the career which is part of our mission statement. thank you for taking the time to explore a career with us. we are excited to be a new group practice in the community. if you are looking for quality supervision as you work towards licensure and ability to serve populations while accepting a variety of insurance panels, we may be a good fit. our supervisors are trained in emdr and utilize a parts work perspective with a trauma lens. we are actively looking to hire a therapist in the area who is passionate about working with adults and committed to growth and excellence in the field. we are located in old town square, fort collins. we value and are strengthened by diversity and desire a warm and welcoming place for all people. we believe in racial and ethnic equality, gender equity and social inclusion. position requirement possibilities:a graduate level psychological counseling-related degreemasters of social work (msw/lsw)licensed professional counselor candidate (lpcc)clinical social worker (lcsw)professional counselor (lpc)marriage/family therapist (lmft)relating to this?wanting to deliver high quality mental healthcareseeking quality supervision and growth in a healthy environmentwhat we offer:flexible work schedulew2 employment - commission basedbuilding to full time workjump of 5 in commission as well as monthly bonus/stipend once full timeweekly supervision providedpaid weekly team meetings 30/hrtwo paid wellness hours/month 30/hrtelemedicine and in-person flexibilitysupportive work environment with direct access to two supervisorsadministrative supportapproved professional development training providedfully automated ehr and technology supportstrong work/life balancejob duties:conducting intake assessmentsdeveloping and implementing treatment plans for clients based on assessment and coordinating any additional services needed, revising as necessaryconducting individual sessions as appropriate for the treatment plan of the patientapplying psychotherapeutic techniques and interventions in the delivery of services to individuals for the purpose of treating emotional and behavioral disorders that have been diagnosed in assessmentparticipating in team meetings in order to staff new cases. presenting appropriate patient information to the team. recommending effective treatment interventions.building and maintaining an active caseload with assigned clientscompleting timely progress notes and treatment updates in the ehr. maintaining all clinical documentation in accordance with regulatory and accrediting standardsproviding crisis intervention to patients in acute distress and referring as neededperforming case management and discharge planning as neededexcellent communication and interpersonal skillscompassionate and empathetic approach to patient careplease send resume and cover letter to infoaspentherapyandwellness.com about aspen therapy and wellness llcaspen therapy and wellness is a mental health services provider focusing on work with adults in an outpatient setting, working with a variety of mental health issues both in-person in old town fort collins and throughout the state of colorado via telehealth services. please note that this job description is not exhaustive and additional duties may be assigned as needed. |  | fulltime | Number of reviews: 1.0"
+      },
+      {
+        "title": "assitant restaurant manager",
+        "location": "cincinnati, oh",
+        "salary_range": "65000-45000",
+        "company_profile": "the national exemplar",
+        "job_desc": "the national exemplar is accepting applications for an assistant restaurant manager. we offer highly competitive wages, healthcare, paid time off, complimentary dining privileges and bonus opportunities. we are a serious, professional, long-standing neighborhood restaurant with over 41 years of service. if you are looking for a long-term fit with a best in class organization then you should apply now. please send a resumes to pardomnationalexemplar.com. o",
+        "skills_desc": "we are currently accepting resumes for foh - asisstant restaurant management with a strong focus on delivering high quality customer service. prefer 1 to 3 years foh management experience. candidate should be a self-starter, proactive, attentive to details and like developing others. must have a strong sense of teamwork and strong witten and verbal communication skills. have a keen interest in service, food and learning. passion for excellence and doing things right.",
+        "employment_type": "fulltime",
+        "No of reviews": "8.0",
+        "text_input": "assitant restaurant manager | cincinnati, oh | 65000-45000 | the national exemplar | the national exemplar is accepting applications for an assistant restaurant manager. we offer highly competitive wages, healthcare, paid time off, complimentary dining privileges and bonus opportunities. we are a serious, professional, long-standing neighborhood restaurant with over 41 years of service. if you are looking for a long-term fit with a best in class organization then you should apply now. please send a resumes to pardomnationalexemplar.com. o | we are currently accepting resumes for foh - asisstant restaurant management with a strong focus on delivering high quality customer service. prefer 1 to 3 years foh management experience. candidate should be a self-starter, proactive, attentive to details and like developing others. must have a strong sense of teamwork and strong witten and verbal communication skills. have a keen interest in service, food and learning. passion for excellence and doing things right. | fulltime | Number of reviews: 8.0"
+      }
+    ],
+    "target_candidates": [],
+    "numeric_features": [
+      "No of reviews"
+    ],
+    "categorical_features": [
+      "title",
+      "location",
+      "salary_range",
+      "company_profile",
+      "job_desc",
+      "skills_desc",
+      "employment_type",
+      "text_input"
+    ],
+    "text_features": [
+      "job_desc",
+      "skills_desc",
+      "text_input"
+    ]
+  },
+  "processed_labeled_dataset_without_encoding.xlsx": {
+    "file": "processed_labeled_dataset_without_encoding.xlsx",
+    "rows": 54391,
+    "columns": 10,
+    "column_names": [
+      "job_title",
+      "location",
+      "industry",
+      "salary_range",
+      "company_profile",
+      "job_desc",
+      "skills_desc",
+      "employment_type",
+      "fraudulent",
+      "text"
+    ],
+    "dtypes": {
+      "job_title": "str",
+      "location": "int64",
+      "industry": "int64",
+      "salary_range": "str",
+      "company_profile": "str",
+      "job_desc": "str",
+      "skills_desc": "str",
+      "employment_type": "str",
+      "fraudulent": "float64",
+      "text": "str"
+    },
+    "missing_values": {
+      "job_title": 2,
+      "location": 0,
+      "industry": 0,
+      "salary_range": 37268,
+      "company_profile": 8399,
+      "job_desc": 3520,
+      "skills_desc": 12869,
+      "employment_type": 15568,
+      "fraudulent": 10346,
+      "text": 0
+    },
+    "duplicate_rows": 3238,
+    "nunique": {
+      "job_title": 11256,
+      "location": 4727,
+      "industry": 1400,
+      "salary_range": 10942,
+      "company_profile": 12071,
+      "job_desc": 28411,
+      "skills_desc": 14400,
+      "employment_type": 12,
+      "fraudulent": 3,
+      "text": 34193
+    },
+    "sample": [
+      {
+        "job_title": "mental health nurse",
+        "location": "4688",
+        "industry": "649",
+        "salary_range": "55016-100476",
+        "company_profile": "rivera and sons  established 2022",
+        "job_desc": "arm drive court sure vote earn 5000week immediate hiring contact now at david27gmailcom",
+        "skills_desc": "basic knowledge in live no degree required flexible hours",
+        "employment_type": "Internship",
+        "fraudulent": "1.0",
+        "text": "mental health nurse rivera and sons  established 2022 arm drive court sure vote earn 5000week immediate hiring contact now at david27gmailcom basic knowledge in live no degree required flexible hours"
+      },
+      {
+        "job_title": "conference centre manager",
+        "location": "1524",
+        "industry": "512",
+        "salary_range": "53438-93138",
+        "company_profile": "davidson jones and gomez  established 2003",
+        "job_desc": "government whom its bed go tax tree black earn 5000week immediate hiring contact now at justinturnergmailcom",
+        "skills_desc": "basic knowledge in seek no degree required flexible hours",
+        "employment_type": "Part-Time",
+        "fraudulent": "1.0",
+        "text": "conference centre manager davidson jones and gomez  established 2003 government whom its bed go tax tree black earn 5000week immediate hiring contact now at justinturnergmailcom basic knowledge in seek no degree required flexible hours"
+      },
+      {
+        "job_title": "engineer land",
+        "location": "1520",
+        "industry": "649",
+        "salary_range": "45584-105229",
+        "company_profile": "allen ltd  established 1998",
+        "job_desc": "i member discuss follow way there nation earn 5000week immediate hiring contact now at lmackdunnvazquezbiz",
+        "skills_desc": "basic knowledge in worker no degree required flexible hours",
+        "employment_type": "Part-Time",
+        "fraudulent": "1.0",
+        "text": "engineer land allen ltd  established 1998 i member discuss follow way there nation earn 5000week immediate hiring contact now at lmackdunnvazquezbiz basic knowledge in worker no degree required flexible hours"
+      }
+    ],
+    "target_candidates": [
+      {
+        "column": "fraudulent",
+        "nunique": 2,
+        "value_counts": {
+          "0.0": 31522,
+          "1.0": 12523,
+          "nan": 10346
+        }
+      }
+    ],
+    "numeric_features": [
+      "location",
+      "industry",
+      "fraudulent"
+    ],
+    "categorical_features": [
+      "job_title",
+      "salary_range",
+      "company_profile",
+      "job_desc",
+      "skills_desc",
+      "employment_type",
+      "text"
+    ],
+    "text_features": [
+      "company_profile",
+      "job_desc",
+      "skills_desc",
+      "text"
+    ]
+  }
+}

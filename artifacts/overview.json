@@ -1,0 +1,257 @@
+{
+  "source_files": [
+    "processed_labeled_dataset_without_encoding.xlsx",
+    "preprocessed_unlabelled_data_bert.xlsx"
+  ],
+  "labelled_schema": {
+    "columns": [
+      "job_title",
+      "location",
+      "industry",
+      "salary_range",
+      "company_profile",
+      "job_desc",
+      "skills_desc",
+      "employment_type",
+      "fraudulent",
+      "text"
+    ],
+    "dtypes": {
+      "job_title": "str",
+      "location": "int64",
+      "industry": "int64",
+      "salary_range": "str",
+      "company_profile": "str",
+      "job_desc": "str",
+      "skills_desc": "str",
+      "employment_type": "str",
+      "fraudulent": "int64",
+      "text": "str"
+    },
+    "missing_values": {
+      "job_title": 2,
+      "location": 0,
+      "industry": 0,
+      "salary_range": 37268,
+      "company_profile": 8399,
+      "job_desc": 3520,
+      "skills_desc": 12869,
+      "employment_type": 15568,
+      "fraudulent": 10346,
+      "text": 0
+    },
+    "duplicate_rows": 3238
+  },
+  "unlabelled_schema": {
+    "rows": 126549,
+    "duplicate_rows": 1354
+  },
+  "training": {
+    "random_state": 42,
+    "raw_rows": 54391,
+    "duplicate_rows": 3238,
+    "rows_after_dedup": 51153,
+    "labelled_rows": 5000,
+    "training_cap": 5000,
+    "train_rows": 4000,
+    "test_rows": 1000,
+    "unlabelled_rows": 126549,
+    "positive_count": 1443,
+    "negative_count": 3557
+  },
+  "tuning": {
+    "logistic_regression": {
+      "C": [
+        0.5,
+        1.0,
+        2.0
+      ]
+    },
+    "multinomial_nb": {
+      "alpha": [
+        0.1,
+        0.5,
+        1.0,
+        2.0
+      ]
+    },
+    "linear_svm": {
+      "C": [
+        0.25,
+        1.0,
+        2.0
+      ]
+    },
+    "combined_logistic_regression": {
+      "C": [
+        0.5,
+        1.0,
+        2.0
+      ]
+    }
+  },
+  "results": [
+    {
+      "model": "Logistic Regression",
+      "features": "TF-IDF text",
+      "best_params": {
+        "C": 2.0,
+        "class_weight": "balanced"
+      },
+      "accuracy": 0.974,
+      "precision": 0.9782,
+      "recall": 0.9308,
+      "f1": 0.9539,
+      "roc_auc": 0.9934,
+      "pr_auc": 0.9895,
+      "confusion_matrix": [
+        [
+          705,
+          6
+        ],
+        [
+          20,
+          269
+        ]
+      ],
+      "false_negatives": 20,
+      "false_positives": 6
+    },
+    {
+      "model": "Naive Bayes",
+      "features": "TF-IDF text",
+      "best_params": {
+        "alpha": 0.1
+      },
+      "accuracy": 0.963,
+      "precision": 1.0,
+      "recall": 0.872,
+      "f1": 0.9316,
+      "roc_auc": 0.9778,
+      "pr_auc": 0.9687,
+      "confusion_matrix": [
+        [
+          711,
+          0
+        ],
+        [
+          37,
+          252
+        ]
+      ],
+      "false_negatives": 37,
+      "false_positives": 0
+    },
+    {
+      "model": "Linear SVM",
+      "features": "TF-IDF text",
+      "best_params": {
+        "C": 2.0,
+        "class_weight": "balanced"
+      },
+      "accuracy": 0.975,
+      "precision": 0.9583,
+      "recall": 0.955,
+      "f1": 0.9567,
+      "roc_auc": 0.9901,
+      "pr_auc": 0.9886,
+      "confusion_matrix": [
+        [
+          699,
+          12
+        ],
+        [
+          13,
+          276
+        ]
+      ],
+      "false_negatives": 13,
+      "false_positives": 12
+    },
+    {
+      "model": "Logistic Regression",
+      "features": "Structured only",
+      "best_params": {
+        "C": 1.0,
+        "class_weight": "balanced"
+      },
+      "accuracy": 0.949,
+      "precision": 0.925,
+      "recall": 0.8962,
+      "f1": 0.9104,
+      "roc_auc": 0.9769,
+      "pr_auc": 0.9651,
+      "confusion_matrix": [
+        [
+          690,
+          21
+        ],
+        [
+          30,
+          259
+        ]
+      ],
+      "false_negatives": 30,
+      "false_positives": 21
+    },
+    {
+      "model": "Logistic Regression",
+      "features": "TF-IDF + structured",
+      "best_params": {
+        "C": 2.0,
+        "class_weight": "balanced"
+      },
+      "accuracy": 0.977,
+      "precision": 0.9926,
+      "recall": 0.9273,
+      "f1": 0.9589,
+      "roc_auc": 0.9923,
+      "pr_auc": 0.9889,
+      "confusion_matrix": [
+        [
+          709,
+          2
+        ],
+        [
+          21,
+          268
+        ]
+      ],
+      "false_negatives": 21,
+      "false_positives": 2
+    }
+  ],
+  "selected_model": {
+    "model": "Logistic Regression",
+    "features": "TF-IDF text",
+    "best_params": {
+      "C": 2.0,
+      "class_weight": "balanced"
+    },
+    "accuracy": 0.974,
+    "precision": 0.9782,
+    "recall": 0.9308,
+    "f1": 0.9539,
+    "roc_auc": 0.9934,
+    "pr_auc": 0.9895,
+    "confusion_matrix": [
+      [
+        705,
+        6
+      ],
+      [
+        20,
+        269
+      ]
+    ],
+    "false_negatives": 20,
+    "false_positives": 6
+  },
+  "decisions": [
+    "Removed exact duplicate rows before splitting.",
+    "Excluded rows with missing fraudulent labels from supervised training.",
+    "Kept text markers such as salary, email-like contact strings, urgency, and payment language because they can carry fraud signal.",
+    "Fitted TF-IDF only on the training split to prevent leakage.",
+    "Used class-balanced linear models because the positive class is smaller than the legitimate class."
+  ]
+}
